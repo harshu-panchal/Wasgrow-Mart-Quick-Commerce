@@ -39,13 +39,20 @@ export interface IOrder extends Document {
   paymentMethod: string;
   paymentStatus: "Pending" | "Paid" | "Failed" | "Refunded";
   paymentId?: string;
+  invoiceNumber?: string;
+  timeSlot?: string;
+  grandTotal?: number;
+  orderId?: string;
 
   // Order Status
   status:
   | "Received"
+  | "Accepted"
   | "Pending"
   | "Processed"
   | "Shipped"
+  | "Picked up"
+  | "On the way"
   | "Out for Delivery"
   | "Delivered"
   | "Cancelled"
@@ -226,6 +233,20 @@ const OrderSchema = new Schema<IOrder>(
       type: String,
       trim: true,
     },
+    invoiceNumber: {
+      type: String,
+      trim: true,
+    },
+    timeSlot: {
+      type: String,
+      trim: true,
+    },
+    grandTotal: {
+      type: Number,
+    },
+    orderId: {
+      type: String,
+    },
 
     // Order Status
     status: {
@@ -233,9 +254,11 @@ const OrderSchema = new Schema<IOrder>(
       enum: [
         "Received",
         "Accepted",
+        "Picked up",
         "Pending",
         "Processed",
         "Shipped",
+        "On the way",
         "Out for Delivery",
         "Delivered",
         "Cancelled",
@@ -368,6 +391,6 @@ OrderSchema.index({ status: 1 });
 OrderSchema.index({ orderDate: -1 });
 OrderSchema.index({ deliveryBoy: 1 });
 
-const Order = mongoose.models.Order || mongoose.model<IOrder>("Order", OrderSchema);
+const Order: mongoose.Model<IOrder> = mongoose.models.Order || mongoose.model<IOrder>("Order", OrderSchema);
 
 export default Order;

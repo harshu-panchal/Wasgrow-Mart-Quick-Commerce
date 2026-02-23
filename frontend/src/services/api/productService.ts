@@ -40,6 +40,8 @@ export interface Product {
   seoKeywords?: string;
   seoImageAlt?: string;
   seoDescription?: string;
+  hsnCode?: string;
+  description?: string;
   smallDescription?: string;
   tags: string[];
   manufacturer?: string;
@@ -81,6 +83,8 @@ export interface CreateProductData {
   seoKeywords?: string;
   seoImageAlt?: string;
   seoDescription?: string;
+  hsnCode?: string;
+  description?: string;
   smallDescription?: string;
   tags?: string[];
   manufacturer?: string;
@@ -105,7 +109,7 @@ export interface Shop {
   image?: string;
 }
 
-export interface UpdateProductData extends Partial<CreateProductData> {}
+export interface UpdateProductData extends Partial<CreateProductData> { }
 
 export interface GetProductsParams {
   search?: string;

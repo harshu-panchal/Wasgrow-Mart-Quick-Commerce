@@ -90,7 +90,7 @@ export default function SellerAddProduct() {
     isShopByStoreOnly: "No",
     shopId: "",
     mainImageUrl: "",
-    galleryImageUrls: [],
+    galleryImageUrls: [] as string[],
   });
 
   useEffect(() => {
@@ -210,13 +210,15 @@ export default function SellerAddProduct() {
               manufacturer: product.manufacturer || "",
               madeIn: product.madeIn || "",
               tax: (product.tax as any)?._id || product.taxId || "",
+              hsnCode: product.hsnCode || "",
+              description: product.description || "",
               isReturnable: product.isReturnable ? "Yes" : "No",
               maxReturnDays: product.maxReturnDays?.toString() || "",
               fssaiLicNo: product.fssaiLicNo || "",
               totalAllowedQuantity:
                 product.totalAllowedQuantity?.toString() || "10",
               mainImageUrl: product.mainImageUrl || product.mainImage || "",
-              galleryImageUrls: product.galleryImageUrls || [],
+              galleryImageUrls: (product.galleryImageUrls || []) as string[],
               isShopByStoreOnly: (product as any).isShopByStoreOnly
                 ? "Yes"
                 : "No",
@@ -502,6 +504,8 @@ export default function SellerAddProduct() {
         seoKeywords: formData.seoKeywords || undefined,
         seoImageAlt: formData.seoImageAlt || undefined,
         seoDescription: formData.seoDescription || undefined,
+        hsnCode: formData.hsnCode || undefined,
+        description: formData.description || undefined,
         smallDescription: formData.smallDescription || undefined,
         tags: tagsArray,
         manufacturer: formData.manufacturer || undefined,
@@ -559,12 +563,14 @@ export default function SellerAddProduct() {
               manufacturer: "",
               madeIn: "",
               tax: "",
+              hsnCode: "",
+              description: "",
               isReturnable: "No",
               maxReturnDays: "",
               fssaiLicNo: "",
               totalAllowedQuantity: "10",
               mainImageUrl: "",
-              galleryImageUrls: [],
+              galleryImageUrls: [] as string[],
               isShopByStoreOnly: "No",
               shopId: "",
             });

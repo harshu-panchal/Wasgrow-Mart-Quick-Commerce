@@ -51,6 +51,7 @@ export interface IAppSettings extends Document {
 
   // Commission Settings
   defaultCommission?: number;
+  globalCommissionRate?: number;
 
   // Delivery Settings
   platformFee?: number;
@@ -245,6 +246,12 @@ const AppSettingsSchema = new Schema<IAppSettings>(
 
     // Commission Settings
     defaultCommission: {
+      type: Number,
+      default: 10,
+      min: [0, "Commission cannot be negative"],
+      max: [100, "Commission cannot exceed 100%"],
+    },
+    globalCommissionRate: {
       type: Number,
       default: 10,
       min: [0, "Commission cannot be negative"],
